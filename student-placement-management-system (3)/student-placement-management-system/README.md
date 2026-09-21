@@ -1,38 +1,69 @@
-# Student Placement Management System
+<div align="center">
 
-A beginner-friendly full-stack placement portal where students can browse opportunities, search and filter jobs, submit applications, track application status, and maintain a profile.
+# 🎓 Student Placement Management System
 
-The project is designed to be demonstrable in two ways: with the Spring Boot and MySQL backend connected, or in frontend Demo Mode using realistic localStorage data.
+A full-stack placement portal where students can browse job and internship opportunities, search and filter listings, apply with validated forms, and track their application status — all the way from Applied to Selected.
 
-## Features
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Java](https://img.shields.io/badge/Java%2017-ED8B00?style=flat&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot%203.3-6DB33F?style=flat&logo=springboot&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
 
-- Dashboard with personalized welcome message and live placement statistics
-- Responsive sidebar navigation for Dashboard, Find Jobs, My Applications, Profile, and Add Job
-- Search jobs by title, company, skill, or location
-- Filter jobs by type, location, and skill
-- View full job details in a modal
-- Apply with client-side validation for contact details, resume URL, and cover letter
-- Prevent duplicate applications for the same job
-- Track applications with status filters and withdraw actions
-- Edit and persist the student profile
-- Add new jobs
-- Registration and login for multiple students
-- Student-specific profiles and application history
-- Demo Mode fallback when the API or database is unavailable
-- SQL schema and sample data for interviews and local database setup
+</div>
 
-## Technologies Used
+---
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- Java 17
-- Spring Boot 3.3
-- Spring Data JPA / Hibernate
-- MySQL
-- SQL
+## 📌 About the Project
 
-## Project Structure
+This is a beginner-friendly but genuinely full-stack placement portal, built to demonstrate frontend, backend, and database skills together in one working application.
+
+It's designed to be demonstrable in **two ways**:
+- **Full stack** — connected to a real Spring Boot + MySQL backend
+- **Demo Mode** — the frontend automatically falls back to realistic sample data in `localStorage` if the backend isn't running, so the whole app still works standalone
+
+## ✨ Features
+
+- 📊 Dashboard with personalized welcome message and live placement statistics
+- 📱 Responsive sidebar navigation — Dashboard, Find Jobs, My Applications, Profile, Add Job
+- 🔍 Search jobs by title, company, skill, or location
+- 🧰 Filter jobs by type, location, and skill
+- 📄 Full job details in a modal
+- ✅ Apply with client-side validation for contact details, resume URL, and cover letter
+- 🚫 Duplicate-application prevention for the same job
+- 📈 Track applications with status filters and withdraw actions
+- 👤 Editable, persisted student profile
+- ➕ Add new job listings
+- 🔐 Registration and login for multiple students
+- 🟢 Demo Mode fallback when the API or database is unavailable
+- 🗄️ SQL schema and sample data, ready to explain in interviews
+
+## 🛠️ Technologies Used
+
+| Layer | Stack |
+|---|---|
+| Frontend | HTML5, CSS3, Vanilla JavaScript |
+| Backend | Java 17, Spring Boot 3.3, Spring Data JPA / Hibernate |
+| Database | MySQL |
+
+## 📸 Screenshots
+
+<div align="center">
+
+| Dashboard | Find Jobs |
+|---|---|
+| ![Dashboard](screenshots/dashboard.png) | ![Find Jobs](screenshots/find-jobs.png) |
+
+| Apply Modal | My Applications |
+|---|---|
+| ![Apply Modal](screenshots/apply-modal.png) | ![My Applications](screenshots/my-applications.png) |
+
+</div>
+
+> Screenshots above will render automatically once you add matching images to the `screenshots/` folder — see [Adding Screenshots](#-adding-screenshots) below.
+
+## 📁 Project Structure
 
 ```text
 student-placement-management-system/
@@ -53,35 +84,35 @@ student-placement-management-system/
 ├── database/
 │   ├── schema.sql
 │   └── sample-data.sql
+├── screenshots/
 └── README.md
 ```
 
-## Project Architecture
+## 🏗️ Architecture
 
 ```text
 HTML/CSS/JavaScript frontend
-          |
-          | REST API requests
-          v
+          │
+          │  REST API requests
+          ▼
 Spring Boot controllers and repositories
-          |
-          v
-MySQL database through Spring Data JPA
+          │
+          ▼
+MySQL database via Spring Data JPA
 ```
 
-When the API is unavailable, the frontend automatically loads sample jobs, applications, and profile data. Changes made in Demo Mode are stored in browser localStorage, and the small `Demo Mode` label explains why the backend is not being used.
+When the API is unavailable, the frontend automatically loads sample jobs, applications, and profile data. Changes made in Demo Mode are stored in browser `localStorage`, and a small **Demo Mode** badge explains why the backend isn't being used.
 
-## Database Design
+## 🗄️ Database Design
 
-- `students` stores student profile information.
-- `jobs` stores job and internship opportunities.
-- `applications` stores submissions and references both `students` and `jobs` with foreign keys.
-- Each student has an account email and password, and every application stores its `student_id`.
-- The logged-in student's ID is used to show only that student's profile and applications.
-- `database/schema.sql` includes table creation plus example SELECT, UPDATE, DELETE, and JOIN queries.
-- `database/sample-data.sql` inserts an example student, twelve jobs, and five applications.
+- `students` — student profile and account information
+- `jobs` — job and internship opportunities
+- `applications` — submissions, referencing both `students` and `jobs` via foreign keys
+- Each student has an account email/password; every application stores its `student_id`
+- `database/schema.sql` — table creation plus example `SELECT`, `UPDATE`, `DELETE`, and `JOIN` queries
+- `database/sample-data.sql` — seeds one student, twelve jobs, and five applications
 
-## API Endpoints
+## 🔌 API Endpoints
 
 | Method | Endpoint | Purpose |
 |---|---|---|
@@ -97,19 +128,15 @@ When the API is unavailable, the frontend automatically loads sample jobs, appli
 | GET | `/api/students/{id}` | Get a student profile |
 | PUT | `/api/students/{id}` | Update a student profile |
 
-## How to Run With MySQL and Spring Boot
+## 🚀 How to Run
 
 ### Prerequisites
-
-Install:
 
 - Java 17 or later
 - Maven 3.9 or later
 - MySQL 8 or later
 
 ### 1. Create the database
-
-Open MySQL and run:
 
 ```sql
 SOURCE path/to/student-placement-management-system/database/schema.sql;
@@ -120,14 +147,14 @@ The schema creates the `placement_db` database automatically.
 
 ### 2. Configure database credentials
 
-Open `backend/src/main/resources/application.properties` and update these values if your MySQL setup is different:
+Open `backend/src/main/resources/application.properties` and update if needed:
 
 ```properties
 spring.datasource.username=${DB_USERNAME:root}
 spring.datasource.password=${DB_PASSWORD:root}
 ```
 
-You can also set the credentials in PowerShell before starting the backend:
+Or set them as environment variables before starting the backend:
 
 ```powershell
 $env:DB_USERNAME = 'root'
@@ -136,21 +163,14 @@ $env:DB_PASSWORD = 'your-mysql-password'
 
 ### 3. Start the backend
 
-From the `backend` directory:
-
 ```bash
+cd backend
 mvn spring-boot:run
 ```
 
-The API starts at `http://localhost:8080`.
-
-The seeded demo account is `anushka@example.com` with password `anushka123`. New users can also register from the frontend.
+API runs at `http://localhost:8080`. Seeded demo account: `anushka@example.com` / `anushka123`.
 
 ### 4. Open the frontend
-
-Open `frontend/index.html` in a browser. For the most reliable local browser behavior, use VS Code Live Server or another simple static file server.
-
-Example with Python:
 
 ```bash
 cd frontend
@@ -159,35 +179,28 @@ python -m http.server 5500
 
 Then open `http://localhost:5500`.
 
-## Run in Demo Mode
+### ⚡ Demo Mode (no backend required)
 
-The frontend does not require MySQL or Spring Boot to demonstrate the main features. Open `frontend/index.html` directly, or serve the `frontend` folder with Live Server. If `http://localhost:8080` is unavailable, the app automatically uses its sample data and localStorage fallback.
+Just open `frontend/index.html` directly, or serve it with Live Server. If `http://localhost:8080` isn't reachable, the app automatically switches to sample data and `localStorage` — no setup needed.
 
-## Screenshots
+## 📷 Adding Screenshots
 
-Add project screenshots here after capturing the dashboard, Find Jobs page, and application modal.
+1. Run the app (Demo Mode is fine).
+2. Take screenshots of the Dashboard, Find Jobs page, Apply modal, and My Applications page.
+3. Save them into the `screenshots/` folder using these exact names: `dashboard.png`, `find-jobs.png`, `apply-modal.png`, `my-applications.png`.
+4. Commit and push — the images in the Screenshots section above will render automatically.
 
-```text
-![Dashboard](screenshots/dashboard.png)
-![Find Jobs](screenshots/find-jobs.png)
-```
+## 🔮 Future Improvements
 
-## Future Improvements
-
-- Authentication and role-based access
+- Role-based access control
 - Resume file upload
 - Email notifications
 - Admin dashboard
 - Interview scheduling
 - Pagination and richer job recommendations
 
-## GitHub Upload
+---
 
-```bash
-git init
-git add .
-git commit -m "Build student placement management system"
-git branch -M main
-git remote add origin https://github.com/YOUR-USERNAME/student-placement-management-system.git
-git push -u origin main
-```
+<div align="center">
+Built as a full-stack portfolio project.
+</div>

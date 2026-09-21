@@ -185,10 +185,14 @@ Just open `frontend/index.html` directly, or serve it with Live Server. If `http
 
 ## 📷 Adding Screenshots
 
-1. Run the app (Demo Mode is fine).
-2. Take screenshots of the Dashboard, Find Jobs page, Apply modal, and My Applications page.
-3. Save them into the `screenshots/` folder using these exact names: `dashboard.png`, `find-jobs.png`, `apply-modal.png`, `my-applications.png`.
-4. Commit and push — the images in the Screenshots section above will render automatically.
+<img width="981" height="915" alt="image" src="https://github.com/user-attachments/assets/82650132-6013-4cfc-ad38-15a0fded75df" />
+
+<img width="1917" height="830" alt="image" src="https://github.com/user-attachments/assets/2fb21d59-f38c-4a06-b65d-503fb856e92a" />
+
+<img width="1112" height="751" alt="image" src="https://github.com/user-attachments/assets/3b760dea-930f-431c-a583-302060bb54dc" />
+
+<img width="1891" height="802" alt="image" src="https://github.com/user-attachments/assets/96a0cff9-6b44-4b77-9429-042d919525a4" />
+
 
 ## 🔮 Future Improvements
 

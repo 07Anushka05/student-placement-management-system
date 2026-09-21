@@ -1,6 +1,11 @@
 <div align="center">
 
+
 # 🎓 Student Placement Management System
+
+## CHECK OUT MY PROJECT --
+
+[placementhub07.netlify.app](https://placementhub07.netlify.app/)
 
 A full-stack placement portal where students can browse job and internship opportunities, search and filter listings, apply with validated forms, and track their application status — all the way from Applied to Selected.
 
@@ -14,6 +19,7 @@ A full-stack placement portal where students can browse job and internship oppor
 </div>
 
 ---
+
 
 ## 📌 About the Project
 
@@ -47,19 +53,7 @@ It's designed to be demonstrable in **two ways**:
 | Backend | Java 17, Spring Boot 3.3, Spring Data JPA / Hibernate |
 | Database | MySQL |
 
-## 📸 Screenshots
 
-<div align="center">
-
-| Dashboard | Find Jobs |
-|---|---|
-| ![Dashboard](screenshots/dashboard.png) | ![Find Jobs](screenshots/find-jobs.png) |
-
-| Apply Modal | My Applications |
-|---|---|
-| ![Apply Modal](screenshots/apply-modal.png) | ![My Applications](screenshots/my-applications.png) |
-
-</div>
 
 > Screenshots above will render automatically once you add matching images to the `screenshots/` folder — see [Adding Screenshots](#-adding-screenshots) below.
 

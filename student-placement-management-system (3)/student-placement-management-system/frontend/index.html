@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlacementHub — Student Placement Management System</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section class="auth-screen" id="authScreen">
+    <div class="auth-brand"><span class="logo-mark">P</span><span>PlacementHub</span></div>
+    <div class="auth-card">
+      <div class="auth-heading">
+        <span class="welcome-kicker">Student placement portal</span>
+        <h1 id="authTitle">Welcome back</h1>
+        <p id="authSubtitle">Sign in to manage your applications.</p>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTab" type="button">Log in</button>
+        <button class="auth-tab" id="registerTab" type="button">Create account</button>
+      </div>
+      <form id="loginForm" class="auth-form">
+        <div class="form-group"><label for="loginEmail">Email</label><input type="email" id="loginEmail" value="anushka@example.com" required></div>
+        <div class="form-group"><label for="loginPassword">Password</label><input type="password" id="loginPassword" value="anushka123" required></div>
+        <button class="btn btn-primary btn-block" type="submit">Log in</button>
+        <p class="auth-hint">Demo account: anushka@example.com / anushka123</p>
+      </form>
+      <form id="registerForm" class="auth-form hidden">
+        <div class="form-group"><label for="registerName">Full name</label><input type="text" id="registerName" required></div>
+        <div class="form-group"><label for="registerEmail">Email</label><input type="email" id="registerEmail" required></div>
+        <div class="form-group"><label for="registerPassword">Password</label><input type="password" id="registerPassword" minlength="6" required></div>
+        <div class="form-group"><label for="registerCollege">College</label><input type="text" id="registerCollege" required></div>
+        <button class="btn btn-primary btn-block" type="submit">Create account</button>
+      </form>
+    </div>
+  </section>
+
+  <div class="mobile-topbar hidden" id="mobileTopbar">
+    <button id="menuToggle" class="icon-btn" aria-label="Menu">☰</button>
+    <span class="mobile-logo">PlacementHub</span>
+  </div>
+
+  <div class="app-shell hidden" id="appShell">
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <span class="logo-mark">P</span>
+        <span class="logo-text">PlacementHub</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">⌂</span> Dashboard
+        </button>
+        <button class="nav-item" data-page="find-jobs">
+          <span class="nav-icon">🔍</span> Find Jobs
+        </button>
+        <button class="nav-item" data-page="my-applications">
+          <span class="nav-icon">📄</span> My Applications
+        </button>
+        <button class="nav-item" data-page="profile">
+          <span class="nav-icon">👤</span> Profile
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn btn-primary btn-block" data-page="add-job">
+          + Add Job
+        </button>
+        <button class="btn btn-ghost btn-block" id="logoutBtn" type="button">Log out</button>
+        <div id="modeBadge" class="mode-badge hidden">● Demo Mode</div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="main-content">
+
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-panel">
+          <div class="welcome-copy">
+            <span class="welcome-kicker">Your placement journey</span>
+            <h1 id="welcomeHeading">Welcome back, Anushka</h1>
+            <p class="subtitle">Here's what's happening with your placements today.</p>
+          </div>
+          <div class="welcome-actions">
+            <button class="btn btn-light" data-page="find-jobs">Explore jobs <span aria-hidden="true">→</span></button>
+            <button class="btn btn-outline-light" data-page="profile">View profile</button>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-blue">💼</div>
+            <div>
+              <div class="stat-value" id="statTotalJobs">0</div>
+              <div class="stat-label">Total Available Jobs</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-purple">📨</div>
+            <div>
+              <div class="stat-value" id="statApplications">0</div>
+              <div class="stat-label">Applications Submitted</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-amber">⏳</div>
+            <div>
+              <div class="stat-value" id="statUnderReview">0</div>
+              <div class="stat-label">Under Review</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon stat-icon-green">🎉</div>
+            <div>
+              <div class="stat-value" id="statSelected">0</div>
+              <div class="stat-label">Selected</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-header">
+            <h2>Recent Applications</h2>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table" id="recentApplicationsTable">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Job Role</th>
+                  <th>Applied Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="recentApplicationsBody"></tbody>
+            </table>
+            <div class="empty-state hidden" id="recentApplicationsEmpty">
+              <p>No applications yet. Explore available jobs and apply to your first opportunity.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-header">
+            <h2>Recommended Jobs</h2>
+          </div>
+          <div class="job-grid" id="recommendedJobsGrid"></div>
+        </div>
+      </section>
+
+      <!-- ---------- FIND JOBS PAGE ---------- -->
+      <section class="page" id="page-find-jobs">
+        <div class="page-header">
+          <div>
+            <h1>Find Jobs</h1>
+            <p class="subtitle">Browse and apply to opportunities that match your skills.</p>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <input type="text" id="searchInput" class="search-input" placeholder="Search by title, company, skill or location...">
+          <select id="filterJobType" class="filter-select">
+            <option value="">All Job Types</option>
+            <option value="Full Time">Full Time</option>
+            <option value="Internship">Internship</option>
+          </select>
+          <select id="filterLocation" class="filter-select">
+            <option value="">All Locations</option>
+          </select>
+          <select id="filterSkill" class="filter-select">
+            <option value="">All Skills</option>
+          </select>
+          <button class="btn btn-ghost" id="clearFiltersBtn">Clear Filters</button>
+        </div>
+
+        <div class="job-grid" id="findJobsGrid"></div>
+        <div class="empty-state hidden" id="findJobsEmpty">
+          <p>No jobs found. Try changing your search or filters.</p>
+        </div>
+      </section>
+
+      <!-- ---------- MY APPLICATIONS PAGE ---------- -->
+      <section class="page" id="page-my-applications">
+        <div class="page-header">
+          <div>
+            <h1>My Applications</h1>
+            <p class="subtitle">Track the status of everything you've applied to.</p>
+          </div>
+        </div>
+
+        <div class="filter-bar">
+          <div class="status-tabs" id="statusTabs">
+            <button class="status-tab active" data-status="All">All</button>
+            <button class="status-tab" data-status="Applied">Applied</button>
+            <button class="status-tab" data-status="Under Review">Under Review</button>
+            <button class="status-tab" data-status="Shortlisted">Shortlisted</button>
+            <button class="status-tab" data-status="Rejected">Rejected</button>
+            <button class="status-tab" data-status="Selected">Selected</button>
+          </div>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table" id="applicationsTable">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Job Role</th>
+                <th>Applied Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="applicationsBody"></tbody>
+          </table>
+          <div class="empty-state hidden" id="applicationsEmpty">
+            <p>No applications yet. Explore available jobs and apply to your first opportunity.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------- PROFILE PAGE ---------- -->
+      <section class="page" id="page-profile">
+        <div class="page-header">
+          <div>
+            <h1>Profile</h1>
+            <p class="subtitle">Your details as they'll appear to recruiters.</p>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="profile-view" id="profileView">
+            <div class="profile-avatar">👤</div>
+            <div class="profile-fields">
+              <div class="profile-field"><span class="field-label">Name</span><span id="profileName" class="field-value">—</span></div>
+              <div class="profile-field"><span class="field-label">Email</span><span id="profileEmail" class="field-value">—</span></div>
+              <div class="profile-field"><span class="field-label">Phone</span><span id="profilePhone" class="field-value">—</span></div>
+              <div class="profile-field"><span class="field-label">College</span><span id="profileCollege" class="field-value">—</span></div>
+              <div class="profile-field"><span class="field-label">Degree</span><span id="profileDegree" class="field-value">—</span></div>
+              <div class="profile-field"><span class="field-label">Graduation Year</span><span id="profileGradYear" class="field-value">—</span></div>
+              <div class="profile-field profile-field-full"><span class="field-label">Skills</span><span id="profileSkills" class="field-value">—</span></div>
+            </div>
+            <button class="btn btn-primary" id="editProfileBtn">Edit Profile</button>
+          </div>
+
+          <form class="profile-form hidden" id="profileForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="formName" required>
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="formEmail" required>
+              </div>
+              <div class="form-group">
+                <label>Phone</label>
+                <input type="text" id="formPhone" required>
+              </div>
+              <div class="form-group">
+                <label>College</label>
+                <input type="text" id="formCollege" required>
+              </div>
+              <div class="form-group">
+                <label>Degree</label>
+                <input type="text" id="formDegree" required>
+              </div>
+              <div class="form-group">
+                <label>Graduation Year</label>
+                <input type="text" id="formGradYear" required>
+              </div>
+              <div class="form-group form-group-full">
+                <label>Skills (comma separated)</label>
+                <input type="text" id="formSkills" required>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-ghost" id="cancelProfileBtn">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Profile</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ---------- ADD JOB PAGE ---------- -->
+      <section class="page" id="page-add-job">
+        <div class="page-header">
+          <div>
+            <h1>Add Job</h1>
+            <p class="subtitle">Post a new opportunity to the job board.</p>
+          </div>
+        </div>
+
+        <form class="card-form" id="addJobForm">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Company Name</label>
+              <input type="text" id="jobCompanyName" required>
+            </div>
+            <div class="form-group">
+              <label>Job Title</label>
+              <input type="text" id="jobTitle" required>
+            </div>
+            <div class="form-group">
+              <label>Location</label>
+              <input type="text" id="jobLocation" required>
+            </div>
+            <div class="form-group">
+              <label>Job Type</label>
+              <select id="jobType" required>
+                <option value="">Select type</option>
+                <option value="Full Time">Full Time</option>
+                <option value="Internship">Internship</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Experience</label>
+              <input type="text" id="jobExperience" placeholder="e.g. 0-1 years" required>
+            </div>
+            <div class="form-group">
+              <label>Required Skills (comma separated)</label>
+              <input type="text" id="jobSkills" placeholder="e.g. Java, SQL, Spring Boot" required>
+            </div>
+            <div class="form-group form-group-full">
+              <label>Description</label>
+              <textarea id="jobDescription" rows="4" required></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Post Job</button>
+          </div>
+        </form>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ============ APPLY MODAL ============ -->
+  <div class="modal-overlay hidden" id="applyModalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Apply for <span id="applyModalJobTitle"></span></h2>
+        <button class="icon-btn" id="closeApplyModal">✕</button>
+      </div>
+      <form id="applyForm" class="modal-body">
+        <input type="hidden" id="applyJobId">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="applyName" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="applyEmail" required>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="text" id="applyPhone" required>
+          </div>
+          <div class="form-group">
+            <label>Skills</label>
+            <input type="text" id="applySkills" required>
+          </div>
+          <div class="form-group form-group-full">
+            <label>Resume Link</label>
+            <input type="url" id="applyResumeLink" placeholder="https://..." required>
+          </div>
+          <div class="form-group form-group-full">
+            <label>Cover Letter</label>
+            <textarea id="applyCoverLetter" rows="4" required></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" id="cancelApplyBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ JOB DETAILS MODAL ============ -->
+  <div class="modal-overlay hidden" id="detailsModalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="detailsModalTitle"></h2>
+        <button class="icon-btn" id="closeDetailsModal">✕</button>
+      </div>
+      <div class="modal-body" id="detailsModalBody"></div>
+      <div class="form-actions">
+        <button class="btn btn-ghost" id="closeDetailsBtn">Close</button>
+        <button class="btn btn-primary" id="applyFromDetailsBtn">Apply Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TOAST NOTIFICATIONS ============ -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

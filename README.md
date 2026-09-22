@@ -54,9 +54,6 @@ It's designed to be demonstrable in **two ways**:
 | Database | MySQL |
 
 
-
-> Screenshots above will render automatically once you add matching images to the `screenshots/` folder — see [Adding Screenshots](#-adding-screenshots) below.
-
 ## 📁 Project Structure
 
 ```text
